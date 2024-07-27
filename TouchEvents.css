@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  padding: 0 1rem;
+}
+.upArrow {
+  font-size: 5rem;
+  transition: transform .5s;
+}
+
+.root {
+  --paddingMargin: 1rem;
+  height: 50vh;
+  background-color: #5f5f5f;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: var(--paddingMargin);
+  margin: 5px;
+  /* transition: bottom 1s; */
+  /* bottom: -450px; */
+  position: fixed;
+}
+.puller {
+  margin-top: calc(var(--paddingMargin) * -1);
+  padding: var(--paddingMargin);
+}
+.pullerInner {
+  margin: 0 auto;
+  width: fit-content;
+  padding: 3px 30px;
+  border-radius: 30px;
+  background-color: #afafaf;
+}
+.root p {
+  color: #fff;
+}
+
+.dot {
+  background-color: red;
+  padding: 1rem;
+  border-radius: 50%;
+  position: absolute;
+}
