@@ -1,15 +1,20 @@
 body {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #3f3f3f;
 }
 
 h1 {
   text-align: center;
   padding: 0 1rem;
+  color: #acacac;
 }
 .upArrow {
   font-size: 5rem;
   transition: transform .5s;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .root {
@@ -24,6 +29,7 @@ h1 {
   /* transition: bottom 1s; */
   /* bottom: -450px; */
   position: fixed;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .25);
 }
 .puller {
   margin-top: calc(var(--paddingMargin) * -1);
