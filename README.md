@@ -1,193 +1,49 @@
-# [Live Site](https://touchevents.netlify.app/) 
+### [Live Site](https://touchevents.netlify.app/) 
 
 # Touch Events Practice
 
-This project demonstrates the implementation of touch events to create a panel that can be pulled up and down on touch devices. It will not work on pointer devices like a mouse.
+Hey everyone! 👋
 
-## Files
+I wanted to share a fun little project I've been working on that demonstrates touch events on touch devices. This project features a panel that you can pull up and down using touch gestures, and it's specifically designed for touch devices (won't work with pointer devices like a mouse).
 
-- `index.html`: The main HTML file containing the structure of the page.
-- `TouchEvents.css`: The CSS file for styling the page.
-- `TouchEvents.js`: The JavaScript file for handling the touch events.
+## Features
 
-## Usage
+- **Interactive Panel:** Pull the panel up and down using touch gestures.
+- **Smooth Animations:** Enjoy smooth transitions for a better user experience.
+- **Swipe Detection:** Accurate detection of swipe up and swipe down gestures.
 
-1. Open the `index.html` file in a touch device browser.
-2. You will see a panel with some text. You can pull this panel up and down using touch gestures.
+## How to Use This in Your Project
 
-## HTML
+Integrating this functionality into your project is simple! Here's a quick guide:
 
-The HTML file sets up the structure of the page, including the panel to be pulled and some placeholder text.
+1. **HTML Structure:** Ensure your HTML structure includes a root element and a puller element.
+2. **CSS Styling:** Add the necessary CSS to style your panel and puller elements.
+3. **JavaScript Logic:** Implement the touch event handling logic to detect swipe gestures and adjust the panel's position accordingly.
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Touch Events</title>
-    <link rel="stylesheet" href="TouchEvents.css" />
-  </head>
-  <body>
-    <h1>
-      Pull that panel <span class="upDownWord">up</span> in any touch device
-      (Won't work in Pointer Devices)
-      <div class="upArrow">&uarr;</div>
-    </h1>
-    <div class="root">
-      <div class="puller">
-        <div class="pullerInner"></div>
-      </div>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque earum
-        molestias perferendis ut, at veritatis odit quae est aliquam molestiae
-        dolore vero magnam impedit voluptatibus ipsam porro expedita tenetur!
-        Vel?
-      </p>
-    </div>
-    <script defer src="TouchEvents.js"></script>
-  </body>
-</html>
-```
+## Getting Started
 
-## JavaScript
+To see this in action, follow these steps:
 
-The JavaScript file handles the touch events and the logic for pulling the panel up and down.
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/yourusername/touch-events-practice.git
+   ```
+2. **Open the Project:**
+   Navigate to the project directory and open the `index.html` file in your favorite touch device's browser.
 
-```javascript
-const puller = document.querySelector(".puller"),
-  panel = document.querySelector(".root"),
-  deadZone = 80, // Swipe cancelling area
-  panelBottom = "-50vh";
-panel.style.bottom = panelBottom;
-let timerId,
-  startingTouchPosition = 0;
+## Why This is Useful
 
-/**
- * Setting Panel's Bottom Property
- * @param {Object} ct
- * @returns {Number} e.changedTouches.pageY
- */
-function handlePanelBottom([ct]) {
-  panel.style.bottom = `${
-    innerHeight - ct.pageY - (panel.clientHeight - 16)
-  }px`; //Reversing default behaviour of touch swipe from top into bottom
-  return ct.pageY;
-}
+- **Improves User Experience:** Touch gestures provide a more natural and intuitive way for users to interact with your web application.
+- **Enhances Mobile Compatibility:** This project is optimized for touch devices, making it perfect for mobile web development.
 
-puller.addEventListener(
-  "touchstart",
-  (e) => {
-    e.preventDefault(); //Preventing reloading on swiping and zooming in pinching
-    clearTimeout(timerId); //Clearing out previous timeouts
-    startingTouchPosition = handlePanelBottom(e.changedTouches);
-  },
-  { passive: false }
-);
+## Contribution
 
-puller.addEventListener("touchmove", (e) => {
-  handlePanelBottom(e.changedTouches);
-});
+I’m constantly updating and improving the code. Feel free to contribute by submitting pull requests or suggesting improvements in the discussions. If you find this useful and integrate it into your project, I'd love to see it! Share your projects and let's inspire each other.
 
-puller.addEventListener("touchend", (e) => {
-  const [ct] = e.changedTouches;
-  //Detecting lower area of any screen
-  if (innerHeight - ct.pageY < 200) {
-    /* Detecting Swipe-Up -> If the CurrentTouchPos (let's say 600) exceeds (in decrement order) 
-    and doesn't exists in between TouchArea from Start to DeadZone (let's say from 700 to 620 (80px distance)) 
-    then pull UP the Panel. */
-    if (ct.pageY < startingTouchPosition - deadZone) {
-      panel.style.bottom = 0;
-      console.log("if 200 executed");
-    } else {
-      panel.style.bottom = panelBottom;
-      console.log("else 200 executed");
-    }
-  } else {
-    /* Detecting Swipe-Down -> If the CurrentTouchPos (let's say 400) exceeds (in increment order) 
-    and doesn't exists in between TouchArea from Start to DeadZone (let's say from 300 to 380 (80px distance)) 
-    then pull DOWN the Panel. */
-    if (ct.pageY > startingTouchPosition + deadZone) {
-      panel.style.bottom = panelBottom;
-      console.log("else if executed");
-    } else {
-      panel.style.bottom = 0;
-      console.log("else else executed");
-    }
-  }
+## Feedback
 
-  if (panel.style.bottom === "0px") {
-    document.querySelector(".upArrow").style.transform = "rotateX(180deg)";
-    document.querySelector(".upDownWord").innerHTML = "down";
-  } else {
-    document.querySelector(".upArrow").style.transform = "";
-    document.querySelector(".upDownWord").innerHTML = "up";
-  }
+Your feedback is valuable! Let me know what you think, and if you have any questions or run into issues, don't hesitate to reach out.
 
-  panel.style.transition = "bottom .7s";
-  timerId = setTimeout(() => {
-    panel.style.transition = "";
-  }, 700);
-});
-```
+Happy coding! 🚀
 
-## CSS
-
-```css
-body {
-  margin: 0;
-  padding: 0;
-}
-
-h1 {
-  text-align: center;
-  padding: 0 1rem;
-}
-.upArrow {
-  font-size: 5rem;
-  transition: transform .5s;
-}
-
-.root {
-  --paddingMargin: 1rem;
-  height: 50vh;
-  background-color: #5f5f5f;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  padding: var(--paddingMargin);
-  margin: 5px;
-  /* transition: bottom 1s; */
-  /* bottom: -450px; */
-  position: fixed;
-}
-.puller {
-  margin-top: calc(var(--paddingMargin) * -1);
-  padding: var(--paddingMargin);
-}
-.pullerInner {
-  margin: 0 auto;
-  width: fit-content;
-  padding: 3px 30px;
-  border-radius: 30px;
-  background-color: #afafaf;
-}
-.root p {
-  color: #fff;
-}
-
-.dot {
-  background-color: red;
-  padding: 1rem;
-  border-radius: 50%;
-  position: absolute;
-}
-```
-
-## Notes
-
-- The touch events are handled to detect both swipe up and swipe down gestures.
-- The `deadZone` variable is used to define a region where the swipe will be canceled if it falls within this area.
-- The `panelBottom` variable sets the initial position of the panel.
-
-This project serves as a practice for understanding and implementing touch events in JavaScript.
+**Gagandeep Singh**

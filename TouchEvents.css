@@ -3,33 +3,47 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #3f3f3f;
+  background: #2e2e2e;
 }
 
 h1 {
   text-align: center;
   padding: 0 1rem;
+  color: #d3d3d3;
+}
+.subText {
+  font-size: 1rem;
   color: #acacac;
+  font-weight: normal;
 }
 .upArrow {
   font-size: 5rem;
-  transition: transform .5s;
+  transition: transform 0.5s;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .root {
   --paddingMargin: 1rem;
   height: 50vh;
-  background-color: #5f5f5f;
+  /* background-color: #5f5f5f; */
+  background: linear-gradient(rgba(0, 0, 0, 0.788) 100%, #0000 0),
+    url(card-bg.webp) no-repeat;
+  background-size: cover;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   padding: var(--paddingMargin);
   margin: 5px;
-  /* transition: bottom 1s; */
+  transition: 0.5s;
+  transition-property: border, box-shadow;
   /* bottom: -450px; */
   position: fixed;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .25);
+  border: 1px solid #6d6d6d;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.103);
+}
+.root:active {
+  border: 1px solid #a3a3a3;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
 }
 .puller {
   margin-top: calc(var(--paddingMargin) * -1);

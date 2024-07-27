@@ -62,7 +62,7 @@ puller.addEventListener("touchend", (e) => {
   if (panel.style.bottom === "0px") {
     document.querySelector(".upArrow").style.transform = "rotateX(180deg)";
     document.querySelector(".upDownWord").innerHTML = "down";
-} else {
+  } else {
     document.querySelector(".upArrow").style.transform = "";
     document.querySelector(".upDownWord").innerHTML = "up";
   }
